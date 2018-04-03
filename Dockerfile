@@ -3,6 +3,10 @@ FROM ubuntu:latest
 RUN apt-get update
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 RUN echo "deb http://download.mono-project.com/repo/ubuntu stable-xenial main" | tee /etc/apt/sources.list.d/mono-official-stable.list
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN apt-get install -y apt-transport-https
 RUN apt-get update
 RUN apt-get install -y mono-complete
 RUN apt-get install -y git
@@ -10,6 +14,7 @@ RUN apt-get install -y apt-utils
 RUN apt-get install -y python-pip python-dev build-essential
 RUN apt-get install -y curl wget
 RUN apt-get install -y dos2unix
+RUN apt-get install -y install dotnet-sdk-2.1.101
 RUN wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.deb
 RUN dpkg -i hugo_0.37.1_Linux-64bit.deb
 RUN pip install --upgrade pip
