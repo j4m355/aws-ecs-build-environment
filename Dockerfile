@@ -14,7 +14,7 @@ RUN apt-get update && \
 	apt-get install -y dotnet-sdk-2.2 && \
 	wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.deb && \
 	dpkg -i hugo_0.37.1_Linux-64bit.deb && \
-	pip install --upgrade pip && \
+	pip install --upgrade pip==9.0.3 && \
 	pip install awscli && \
 	pip install awscli --force-reinstall --upgrade && \
 	curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
