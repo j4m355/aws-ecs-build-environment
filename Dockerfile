@@ -9,7 +9,6 @@ RUN apt-get update && \
 	wget -q https://packages.microsoft.com/config/ubuntu/18.10/packages-microsoft-prod.deb && \
 	dpkg -i packages-microsoft-prod.deb && \
 	apt-get install -y apt-transport-https && \	
-	apt-get install -y apt-transport-https  && \
 	apt-get update && \
 	apt-get install -y dotnet-sdk-2.2 && \
 	wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.deb && \
