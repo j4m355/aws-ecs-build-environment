@@ -10,13 +10,16 @@ RUN apt-get install -y apt-utils
 RUN apt-get install -y python-pip python-dev build-essential
 RUN apt-get install -y curl wget
 RUN apt-get install -y dos2unix
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list
 RUN apt-get install -y apt-transport-https
 RUN apt-get update
 RUN apt-get install -y apt-transport-https
-RUN apt-get install -y dotnet-sdk-2.1.101
+
+RUN wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg -i packages-microsoft-prod.deb
+RUN apt-get update
+RUN apt-get install -y dotnet-sdk-3.0
+
+
 RUN wget https://github.com/gohugoio/hugo/releases/download/v0.37.1/hugo_0.37.1_Linux-64bit.deb
 RUN dpkg -i hugo_0.37.1_Linux-64bit.deb
 RUN pip install --upgrade pip
@@ -32,4 +35,5 @@ RUN lsb_release -a
 RUN whoami
 RUN hugo version
 RUN mono --version
+RUN dotnet --version
 RUN apt-get install -y nuget
